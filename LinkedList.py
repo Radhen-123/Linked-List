@@ -18,6 +18,28 @@ class LinkedList:
         while Pointer.NextNode != None:
             Pointer = Pointer.NextNode
         Pointer.NextNode = NewNode
+        
+        
+    def Insert_At_Index(self, Index, Data):
+        NewNode = LinkedListNode(Data)
+        FindPointer = 1
+        if(Index <= 0):
+            print("Insertion at Invalid Index")
+        elif(Index == 1):
+            self.Insert_At_Start(Data)
+        elif (Index <= self.Length()):
+            Pointer = self.Start
+            while FindPointer != Index:
+                PrePointer = Pointer
+                Pointer = Pointer.NextNode
+                FindPointer += 1
+            PrePointer.NextNode = NewNode
+            NewNode.NextNode = Pointer
+        elif (Index == self.Length() + 1):
+            self.Insert_At_End(Data)
+        else:
+            print("Insertion Out of Range")
+
 
 
     def Delete_At_Start(self):
@@ -32,6 +54,27 @@ class LinkedList:
             Pointer = Pointer.NextNode
         PrePointer.NextNode = None
         del Pointer
+        
+    def Delete_At_Index(self, Index):
+        FindIndex = 1
+        Pointer = self.Start
+        if Index <= 0:
+            print("Deletion Invalid Index")
+        elif (Index == 1):
+            self.Delete_At_Start()
+        elif(Index == self.Length()):
+            self.Delete_At_End()
+        elif Index <= self.Length() :
+            while FindIndex != Index:
+                PrePointer = Pointer
+                Pointer = Pointer.NextNode
+                FindIndex += 1
+            PrePointer.NextNode = Pointer.NextNode
+            del Pointer
+        else:
+            print("Deletion Out of Range")
+        
+        
 
     def Print_Linked_List(self):
         Begin = self.Start

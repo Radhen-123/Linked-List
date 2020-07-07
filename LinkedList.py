@@ -39,7 +39,20 @@ class LinkedList:
             self.Insert_At_End(Data)
         else:
             print("Insertion Out of Range")
-
+        
+        def Insert_Before_Number(self, Number, Data):
+            Pointer = self.Start
+            NewNode = LinkedListNode(Data)
+            Count = 0
+            if Number ==   Pointer.Data:
+                self.Insert_At_Start(Data)
+            else:
+                while Pointer.Data != Number and Pointer.NextNode != None:
+                    PrePointer = Pointer
+                    Pointer = Pointer.NextNode
+                    Count += 1
+                PrePointer.NextNode = NewNode
+                NewNode.NextNode = Pointer
 
 
     def Delete_At_Start(self):

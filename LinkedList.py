@@ -7,10 +7,12 @@ class LinkedList:
     def __init__(self, Start = None):
         self.Start = Start
 
+
     def Insert_At_Start(self, Data):
         NewNode = LinkedListNode(Data)
         NewNode.NextNode = self.Start
         self.Start = NewNode
+
 
     def Insert_At_End(self, Data):
         NewNode = LinkedListNode(Data)
@@ -18,8 +20,7 @@ class LinkedList:
         while Pointer.NextNode != None:
             Pointer = Pointer.NextNode
         Pointer.NextNode = NewNode
-        
-        
+
     def Insert_At_Index(self, Index, Data):
         NewNode = LinkedListNode(Data)
         FindPointer = 1
@@ -39,26 +40,37 @@ class LinkedList:
             self.Insert_At_End(Data)
         else:
             print("Insertion Out of Range")
-        
-        def Insert_Before_Number(self, Number, Data):
-            Pointer = self.Start
-            NewNode = LinkedListNode(Data)
-            Count = 0
-            if Number ==   Pointer.Data:
-                self.Insert_At_Start(Data)
-            else:
-                while Pointer.Data != Number and Pointer.NextNode != None:
-                    PrePointer = Pointer
-                    Pointer = Pointer.NextNode
-                    Count += 1
-                PrePointer.NextNode = NewNode
-                NewNode.NextNode = Pointer
 
+    def Insert_Before_Number(self, Number, Data):
+        Pointer = self.Start
+        NewNode = LinkedListNode(Data)
+        Count = 0
+        if Number ==   Pointer.Data:
+            self.Insert_At_Start(Data)
+        else:
+            while Pointer.Data != Number and Pointer.NextNode != None:
+                PrePointer = Pointer
+                Pointer = Pointer.NextNode
+                Count += 1
+            PrePointer.NextNode = NewNode
+            NewNode.NextNode = Pointer
+
+
+    def Insert_After_Number(self, Number, Data):
+        Pointer = self.Start
+        PastPointer = Pointer.NextNode
+        NewNode = LinkedListNode(Data)
+        while Pointer.Data != Number and Pointer.NextNode != None:
+            Pointer = Pointer.NextNode
+            PastPointer =PastPointer.NextNode
+        Pointer.NextNode = NewNode
+        NewNode.NextNode = PastPointer
 
     def Delete_At_Start(self):
         Pointer = self.Start
         self.Start = Pointer.NextNode
         del Pointer
+
 
     def Delete_At_End(self):
         Pointer = self.Start
@@ -67,7 +79,7 @@ class LinkedList:
             Pointer = Pointer.NextNode
         PrePointer.NextNode = None
         del Pointer
-        
+
     def Delete_At_Index(self, Index):
         FindIndex = 1
         Pointer = self.Start
@@ -86,23 +98,89 @@ class LinkedList:
             del Pointer
         else:
             print("Deletion Out of Range")
-        
-        
+
+    def Delete_Number(self, Number):
+        Pointer = self.Start
+        if Pointer.NextNode == None:
+            print("List is Empty")
+        else:
+            while Pointer.Data != Number:
+                PrePointer = Pointer
+                Pointer = Pointer.NextNode
+            PrePointer.NextNode = Pointer.NextNode
+            del Pointer
 
     def Print_Linked_List(self):
         Begin = self.Start
+        Count = 0
         while Begin != None:
-            print(Begin.Data)
+            Count += 1
+            print("Index:"+str(Count)+" Data: "+str(Begin.Data))
             Begin = Begin.NextNode
 
-ll = LinkedList()
-ll.Insert_At_Start(685)
-ll.Insert_At_Start(54)
-ll.Insert_At_Start(79)
-ll.Insert_At_End(65)
-ll.Insert_At_End(56)
-ll.Print_Linked_List()
-print("Update")
-ll.Delete_At_Start()
-ll.Delete_At_End()
-ll.Print_Linked_List()
+    def Length(self):
+        Count = 0
+        StartPointer = self.Start
+        while StartPointer != None:
+            StartPointer = StartPointer.NextNode
+            Count += 1
+        return Count
+
+def Function_Of_Linked_List():
+    print("*********Index Menu**********")
+    print("1 For insert Data at Start")
+    print("2 For insert Data at End")
+    print("3 For insert Data at Index")
+    print("4 For insert Data Before Number")
+    print("5 For insert Data after Number")
+    print("6 For Delete Element at Start")
+    print("7 For Delete Element at End")
+    print("8 For Delete Element at Index")
+    print("9 For Delete given Number")
+    print("10 Print Length of list")
+    print("11 for exit")
+    Linked_List = LinkedList()
+    Start = 0
+    while Start != 11:
+        Number = int(input("Enter your Selection: "))
+        if Number == 1:
+            Data = int(input("Enter Data to insert: "))
+            Linked_List.Insert_At_Start(Data)
+            Linked_List.Print_Linked_List()
+        elif Number == 2:
+            Data = int(input("Enter Data to insert: "))
+            Linked_List.Insert_At_End(Data)
+            Linked_List.Print_Linked_List()
+        elif Number == 3:
+            Data = int(input("Enter Data to insert: "))
+            Index = int(input("Enter Index: "))
+            Linked_List.Insert_At_Index(Index, Data)
+            Linked_List.Print_Linked_List()
+        elif Number == 4:
+            Data = int(input("Enter Data to insert: "))
+            BeforeNumber = int(input("Before which Number: "))
+            Linked_List.Insert_Before_Number(BeforeNumber, Data)
+            Linked_List.Print_Linked_List()
+        elif Number == 5:
+            Data = int(input("Enter Data to insert: "))
+            AfterNumber = int(input("After which Number: "))
+            Linked_List.Insert_After_Number(AfterNumber, Data)
+            Linked_List.Print_Linked_List()
+        elif Number == 6:
+            Linked_List.Delete_At_Start()
+            Linked_List.Print_Linked_List()
+        elif Number == 7:
+            Linked_List.Delete_At_End()
+            Linked_List.Print_Linked_List()
+        elif Number == 8:
+            Index = int(input("Enter Index: "))
+            Linked_List.Delete_At_Index(Index)
+            Linked_List.Print_Linked_List()
+        elif Number == 9:
+            Number = int(input("Enter Number To Delete: "))
+            Linked_List.Delete_Number(Number)
+            Linked_List.Print_Linked_List()
+        elif Number == 10:
+            print(Linked_List.Length())
+        Start = Number
+Function_Of_Linked_List()

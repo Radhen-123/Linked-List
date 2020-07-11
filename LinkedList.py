@@ -17,9 +17,12 @@ class LinkedList:
     def Insert_At_End(self, Data):
         NewNode = LinkedListNode(Data)
         Pointer = self.Start
-        while Pointer.NextNode != None:
-            Pointer = Pointer.NextNode
-        Pointer.NextNode = NewNode
+        if  Pointer == None:
+            self.Insert_At_Start(Data)
+        else:
+            while Pointer.NextNode != None:
+                Pointer = Pointer.NextNode
+            Pointer.NextNode = NewNode
 
     def Insert_At_Index(self, Index, Data):
         NewNode = LinkedListNode(Data)
@@ -68,22 +71,33 @@ class LinkedList:
 
     def Delete_At_Start(self):
         Pointer = self.Start
-        self.Start = Pointer.NextNode
-        del Pointer
+        if Pointer == None:
+            print("List is Empty")
+            return None
+        else:
+            self.Start = Pointer.NextNode
+            del Pointer
 
 
     def Delete_At_End(self):
         Pointer = self.Start
-        while Pointer.NextNode != None:
-            PrePointer = Pointer
-            Pointer = Pointer.NextNode
-        PrePointer.NextNode = None
-        del Pointer
+        if Pointer == None:
+            print("List is Empty")
+            return None
+        else:
+            while Pointer.NextNode != None:
+                PrePointer = Pointer
+                Pointer = Pointer.NextNode
+            PrePointer.NextNode = None
+            del Pointer
 
     def Delete_At_Index(self, Index):
         FindIndex = 1
         Pointer = self.Start
-        if Index <= 0:
+        if Pointer == None:
+            print("List is Empty")
+            return None
+        elif Index <= 0:
             print("Deletion Invalid Index")
         elif (Index == 1):
             self.Delete_At_Start()
@@ -101,7 +115,7 @@ class LinkedList:
 
     def Delete_Number(self, Number):
         Pointer = self.Start
-        if Pointer.NextNode == None:
+        if Pointer == None:
             print("List is Empty")
         else:
             while Pointer.Data != Number:
@@ -109,14 +123,16 @@ class LinkedList:
                 Pointer = Pointer.NextNode
             PrePointer.NextNode = Pointer.NextNode
             del Pointer
-
     def Print_Linked_List(self):
         Begin = self.Start
         Count = 0
-        while Begin != None:
-            Count += 1
-            print("Index:"+str(Count)+" Data: "+str(Begin.Data))
-            Begin = Begin.NextNode
+        if Begin == None:
+            print("No Data To print")
+        else:
+            while Begin != None:
+                Count += 1
+                print("Index:" + str(Count) + " Data: " + str(Begin.Data))
+                Begin = Begin.NextNode
 
     def Length(self):
         Count = 0

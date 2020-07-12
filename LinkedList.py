@@ -1,12 +1,12 @@
-class LinkedListNode:
+class LinkedListNode:                                   #Defininng Structure of LinkedList
     def __init__(self, Data, NextNode = None):
-        self.Data = Data
-        self.NextNode = NextNode
+        self.Data = Data                                #Data Portion
+        self.NextNode = NextNode                        #Address Portion
 
 class LinkedList:
     def __init__(self, Start = None):
-        self.Start = Start
-
+        self.Start = Start                              #Start Will always point To First Element
+                                                        #All Functions Performed by Linked List
 
     def Insert_At_Start(self, Data):
         NewNode = LinkedListNode(Data)
